@@ -12,14 +12,14 @@ class EntityManagerCreator
     {
         // Create a simple "default" Doctrine ORM configuration for Attributes
         $config = ORMSetup::createAttributeMetadataConfiguration(
-            [__DIR__ . "/src"],
+            [__DIR__ . "/.."],
             true,
         );
 
         // configuring the database connection
         $connection = DriverManager::getConnection([
             'driver' => 'pdo_sqlite',
-            'path' => __DIR__ . '/db.sqlite',
+            'path' => __DIR__ . '/../../db.sqlite',
         ], $config);
 
         // obtaining the entity manager
