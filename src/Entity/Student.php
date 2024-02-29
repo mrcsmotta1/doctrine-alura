@@ -13,11 +13,11 @@ class Student
     #[Id]
     #[GeneratedValue]
     #[Column]
-    public readonly int $id;
+    public int $id;
 
     public function __construct(
         #[Column]
-        public readonly string $name
+        public string $name
     ) {
     }
 }
