@@ -38,4 +38,6 @@ foreach ($studentList as $student) {
 
 $studentClass = Student::class;
 $dql = "SELECT COUNT(student) FROM $studentClass student";
-var_dump($entityManager->createQuery($dql)->getSingleScalarResult());
+$query = $entityManager->createQuery($dql)->enableResultCache(86400);
+$singleScalarResult = $query->getSingleScalarResult();
+var_dump($singleScalarResult);
