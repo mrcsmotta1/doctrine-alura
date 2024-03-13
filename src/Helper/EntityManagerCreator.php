@@ -7,6 +7,7 @@ use Doctrine\Migrations\Tools\Console\ConsoleLogger;
 use Doctrine\ORM\ORMSetup;
 use Doctrine\ORM\EntityManager;
 use Doctrine\DBAL\DriverManager;
+use Symfony\Component\Cache\Adapter\PhpFilesAdapter;
 use Symfony\Component\Console\Output\ConsoleOutput;
 
 class EntityManagerCreator
@@ -25,6 +26,22 @@ class EntityManagerCreator
         $config->setMiddlewares([
             $logMiddleware
         ]);
+
+        $cacheDirectory = __DIR__ . '/../../var/cache';
+        $config->setMetadataCache(new PhpFilesAdapter(
+            namespace: 'metadata_cache',
+            directory: $cacheDirectory
+        ));
+
+        $config->setQueryCache(new PhpFilesAdapter(
+            namespace: 'query_cache',
+            directory: $cacheDirectory
+        ));
+
+        $config->setResultCache(new PhpFilesAdapter(
+            namespace: 'result_cache',
+            directory: $cacheDirectory
+        ));
 
         // configuring the database connection
         $connection = DriverManager::getConnection([
